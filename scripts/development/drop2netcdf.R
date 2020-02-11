@@ -8,7 +8,7 @@ time_scale = c(1, 3, 6, 12)
 # time_scale = c(1)
 
 dirin = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
-dirout = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/gitlab/drop/data'
+dirout = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/github/drop/data'
 
 # setwd(dirin)
 # files = list.files(pattern = "^SPI(.*)RData$")
@@ -86,7 +86,7 @@ for (isc in 1:length(time_scale)) {
   # create netCDF file and put arrays
   
   
-  ncfname <- paste0(dirout,"/DROP_",sc,"_1981_2019.nc")
+  ncfname <- paste0(dirout,"/DROP_",sc,"_1981_2020.nc")
   ncout <- nc_create(ncfname, list(mean_def, spread_def,warning_def,probability_def))
   
   # put variables

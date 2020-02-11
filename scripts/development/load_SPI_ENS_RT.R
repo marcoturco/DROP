@@ -18,7 +18,7 @@ data(wrld_simpl)
 dir_oss = '/data/disk1/'
 dir_out = '/data/disk1/DROP/'
 dir_data = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
-anni = 1981:2019
+anni = 1981:2020
 mesi = rep(1:12, length(anni))
 mesi_8 = which(mesi == 12)
 
@@ -43,7 +43,7 @@ for (isc in 1:length(time_scale)) {
     paste(dir_oss,
       "/CAMS_OPI/cams_opi_v0208/SPI",
       sc,
-      "_CAMS_OPI_1981_2019.RData",
+      "_CAMS_OPI_1981_2020.RData",
       sep = ""
     )
   ))
@@ -53,7 +53,7 @@ for (isc in 1:length(time_scale)) {
   load(file.path(
     paste(dir_oss,"/CHIRPS/SPI",
       sc,
-      "_CHIRPS_1981_2019.RData",
+      "_CHIRPS_1981_2020.RData",
       sep = ""
     )
   ))
@@ -65,7 +65,7 @@ for (isc in 1:length(time_scale)) {
       dir_oss,
       "/CPC_GLOBAL_PRECIP/SPI",
       sc,
-      "_CPC_1981_2019.RData",
+      "_CPC_1981_2020.RData",
       sep = ""
     )
   ))
@@ -77,7 +77,7 @@ for (isc in 1:length(time_scale)) {
       dir_oss,
       "/ERA5/SPI",
       sc,
-      "_ERA5_1981_2019.RData",
+      "_ERA5_1981_2020.RData",
       sep = ""
     )
   ))
@@ -86,20 +86,20 @@ for (isc in 1:length(time_scale)) {
   
   
   load(file.path(
-    paste(dir_oss, "/GPCCv2018/SPI", sc, "_GPCC_1981_2019.RData", sep = "")
+    paste(dir_oss, "/GPCCv2018/SPI", sc, "_GPCC_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 5] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss, "/GPCPv2_3/SPI", sc, "_GPCP_1981_2019.RData", sep = "")
+    paste(dir_oss, "/GPCPv2_3/SPI", sc, "_GPCP_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 6] = aux[, ,]
   
   
   load(file.path(
-    paste(dir_oss, "/JRA55/SPI", sc, "_JRA55_1981_2019.RData", sep = "")
+    paste(dir_oss, "/JRA55/SPI", sc, "_JRA55_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 7] = aux[, ,]
@@ -108,7 +108,7 @@ for (isc in 1:length(time_scale)) {
     paste(dir_oss,
       "/MERRA2/SPI",
       sc,
-      "_MERRA2_1981_2019.RData",
+      "_MERRA2_1981_2020.RData",
       sep = ""
     )
   ))
@@ -116,13 +116,13 @@ for (isc in 1:length(time_scale)) {
   pred[, , , 8] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss, "/NCEP/SPI", sc, "_NCEP_1981_2019.RData", sep = "")
+    paste(dir_oss, "/NCEP/SPI", sc, "_NCEP_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 9] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss, "/PRECL/SPI", sc, "_PRECL_1981_2019.RData", sep = "")
+    paste(dir_oss, "/PRECL/SPI", sc, "_PRECL_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 10] = aux[, ,]
@@ -140,8 +140,8 @@ for (isc in 1:length(time_scale)) {
       }
     }
   }
-  save(spi, file = paste0(dir_out, "/SPI", sc, "_ENS_1981_2019.RData"))
-  save(spi, file = paste0(dir_data, "/SPI", sc, "_ENS_1981_2019.RData"))
+  save(spi, file = paste0(dir_out, "/SPI", sc, "_ENS_1981_2020.RData"))
+  save(spi, file = paste0(dir_data, "/SPI", sc, "_ENS_1981_2020.RData"))
   
   image.plot(lon, lat, spi[, , mese_aug2000-2])
   plot(wrld_simpl, add = TRUE)
@@ -149,8 +149,8 @@ for (isc in 1:length(time_scale)) {
 
   spi_sd = apply(pred, c(1, 2, 3), sd, na.rm = TRUE)
   spi_sd[,,mese_aug2000:dim(spi)[3]]=NA
-  save(spi_sd, file = paste0(dir_out, "/SPI", sc, "_ENS_SPREAD_1981_2019.RData"))
-  save(spi_sd, file = paste0(dir_data, "/SPI", sc, "_ENS_SPREAD_1981_2019.RData"))
+  save(spi_sd, file = paste0(dir_out, "/SPI", sc, "_ENS_SPREAD_1981_2020.RData"))
+  save(spi_sd, file = paste0(dir_data, "/SPI", sc, "_ENS_SPREAD_1981_2020.RData"))
   
   points <- expand.grid(lon, lat)
   pts = SpatialPoints(points, proj4string = CRS(proj4string(wrld_simpl)))
@@ -173,8 +173,8 @@ for (isc in 1:length(time_scale)) {
     spi_prob[, ,im]=spi_prob[, ,im]*inout
   } 
   spi_prob[,,mese_aug2000:dim(spi)[3]]=NA
-  save(spi_prob, file = paste0(dir_out, "/SPI_PROB", sc, "_DROP_1981_2019.RData"))
-  save(spi_prob, file = paste0(dir_data, "/SPI_PROB", sc, "_DROP_1981_2019.RData"))
+  save(spi_prob, file = paste0(dir_out, "/SPI_PROB", sc, "_DROP_1981_2020.RData"))
+  save(spi_prob, file = paste0(dir_data, "/SPI_PROB", sc, "_DROP_1981_2020.RData"))
   
   ## traffic light
   spi_tl = array(data = NA, dim = c(length(lon), length(lat), dim(pred)[3]))
@@ -216,8 +216,8 @@ for (isc in 1:length(time_scale)) {
     spi_tl[, , im] = spi_tl[, , im] * inout
   } 
   spi_tl[,,mese_aug2000:dim(spi)[3]]=NA
-  save(spi_tl, file = paste0(dir_out, "/SPI_TRAF_LIG_", sc, "_DROP_1981_2019.RData"))
-  save(spi_tl, file = paste0(dir_data, "/SPI_TRAF_LIG_", sc, "_DROP_1981_2019.RData"))
+  save(spi_tl, file = paste0(dir_out, "/SPI_TRAF_LIG_", sc, "_DROP_1981_2020.RData"))
+  save(spi_tl, file = paste0(dir_data, "/SPI_TRAF_LIG_", sc, "_DROP_1981_2020.RData"))
 }
 
 #ni = length(lon)
