@@ -9,6 +9,15 @@ library(classInt) # finds class intervals for continuous variables
 library(fields)
 library(maps)
 
+
+##
+anni = 1981:2020
+mesi = rep(1:12, length(anni))
+anno_2000 = which(anni == 2020)
+mese_ind = which(mesi == 1)
+last_month = mese_ind[anno_2000]
+
+
 ##
 
 data(wrld_simpl)
@@ -18,9 +27,7 @@ data(wrld_simpl)
 dir_oss = '/data/disk1/'
 dir_out = '/data/disk1/DROP/'
 dir_data = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
-anni = 1981:2020
-mesi = rep(1:12, length(anni))
-mesi_8 = which(mesi == 12)
+
 
 
 load(file.path(dir_oss, "GPCPv2_3/lon_GPCP_1981_2017.RData"))
@@ -28,12 +35,13 @@ load(file.path(dir_oss, "GPCPv2_3/lat_GPCP_1981_2017.RData"))
 
 
 ## load data
-pred = array(data = NA, dim = c(length(lon), length(lat), length(mesi), 10))
+
 
 
 time_scale = c(1,3,6,12)
 
 for (isc in 1:length(time_scale)) {
+  pred = array(data = NA, dim = c(length(lon), length(lat), length(mesi), 10))
   sc = time_scale[isc]
   
   nam <- paste("spi", sc, sep = "")
@@ -126,12 +134,13 @@ for (isc in 1:length(time_scale)) {
   ))
   aux = get(nam)
   pred[, , , 10] = aux[, ,]
-  
+  rm(aux)
+  aux=pred[,,1:last_month,]
+  rm(pred)
+  pred=aux
+  rm(aux)
   spi = (apply(pred, c(1, 2, 3), mean, na.rm = TRUE))
-  anno_2000 = which(anni == 2019)
-  mese_aug = which(mesi == 12)
-  mese_aug2000 = mese_aug[anno_2000]
-  spi[,,mese_aug2000:dim(spi)[3]]=NA
+
   
   for (i in 1:dim(pred)[1]) {
     for (j in 1:dim(pred)[2]) {
@@ -140,15 +149,18 @@ for (isc in 1:length(time_scale)) {
       }
     }
   }
+  
+  image.plot(lon, lat, spi[, , last_month])
+  plot(wrld_simpl, add = TRUE)
+  
+  
   save(spi, file = paste0(dir_out, "/SPI", sc, "_ENS_1981_2020.RData"))
   save(spi, file = paste0(dir_data, "/SPI", sc, "_ENS_1981_2020.RData"))
   
-  image.plot(lon, lat, spi[, , mese_aug2000-2])
-  plot(wrld_simpl, add = TRUE)
+
   # 
 
   spi_sd = apply(pred, c(1, 2, 3), sd, na.rm = TRUE)
-  spi_sd[,,mese_aug2000:dim(spi)[3]]=NA
   save(spi_sd, file = paste0(dir_out, "/SPI", sc, "_ENS_SPREAD_1981_2020.RData"))
   save(spi_sd, file = paste0(dir_data, "/SPI", sc, "_ENS_SPREAD_1981_2020.RData"))
   
@@ -172,7 +184,6 @@ for (isc in 1:length(time_scale)) {
     }
     spi_prob[, ,im]=spi_prob[, ,im]*inout
   } 
-  spi_prob[,,mese_aug2000:dim(spi)[3]]=NA
   save(spi_prob, file = paste0(dir_out, "/SPI_PROB", sc, "_DROP_1981_2020.RData"))
   save(spi_prob, file = paste0(dir_data, "/SPI_PROB", sc, "_DROP_1981_2020.RData"))
   
@@ -215,26 +226,7 @@ for (isc in 1:length(time_scale)) {
     }
     spi_tl[, , im] = spi_tl[, , im] * inout
   } 
-  spi_tl[,,mese_aug2000:dim(spi)[3]]=NA
   save(spi_tl, file = paste0(dir_out, "/SPI_TRAF_LIG_", sc, "_DROP_1981_2020.RData"))
   save(spi_tl, file = paste0(dir_data, "/SPI_TRAF_LIG_", sc, "_DROP_1981_2020.RData"))
 }
 
-#ni = length(lon)
-#nj = length(lat)
-
-
-#
-# anno_for = which(anni == 2003)
-# 
-# image.plot(lon, lat, spi_prob[, , anno_for])
-# plot(wrld_simpl, add = TRUE)
-# 
-# image.plot(lon, lat, spi_tl[, , anno_for])
-# plot(wrld_simpl, add = TRUE)
-
-
-# inout = ENS[, , anno_for] * 0
-# image.plot(lon, lat, inout)
-# plot(wrld_simpl, add = TRUE)
-# 

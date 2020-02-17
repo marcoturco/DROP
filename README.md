@@ -1,9 +1,9 @@
 ### The DROP dataset
 
-DROP is  global land gridded dataset to monitoring DROught from Probabilistic approach. This enhances previously available climate datasets, which were static in nature or that not provide uncertainty estimations. An ensemble approach, similarly to weather/climate prediction studies, has been applied for DROP, where the members are different observations-based products (see following Table).
+DROP is a global land gridded dataset to monitoring DROught from Probabilistic approach. This enhances previously available climate datasets, which were static in nature or that not provide uncertainty estimations. An ensemble approach, similarly to weather/climate prediction studies, has been applied for DROP, where the members are different observations-based products (see following Table).
 <br/>
 
-DroP is available from https://earth.bsc.es/gitlab/mturco/drop from January 1981 to December 2019, which will be extended to near real-time as additional months of data become available. Files were created in NetCDF format following the Climate metadata standards. DROP provides information in a variety of ways:
+DroP is available from https://b2share.eudat.eu/records/3146138a23ef48849d3f71ef332c086d and from https://github.com/marcoturco/DROP/tree/master/data from January 1981 to the last month. Files were created in NetCDF format following the Climate metadata standards. DROP provides information in a variety of ways:
 <br/>
 - SPI values. The ensemble mean of DROP provides the values of the SPI index. This could be of use for user that need to quantify the drought conditions. 
 <br/>
@@ -13,7 +13,7 @@ DroP is available from https://earth.bsc.es/gitlab/mturco/drop from January 1981
 <br/>
 <br/>
 <p align="center">
-  <img src="drought_matrix_levels.png" width="450" title="hover text">
+  <img src="www/images/drought_matrix_levels.png" width="450" title="hover text">
 </p>
 <br/>
 For example, yellow could reflect either a high probability of abnormally dry conditions or a low probability of a severe drought. This approach is based on the 
@@ -44,6 +44,7 @@ The following table indicate the individual ensemble member that constitutes the
 | PREC/L | https://www.esrl.noaa.gov/psd/data/gridded/data.precl.html       |
 
 
+
 <br/>
 
 
@@ -52,16 +53,14 @@ The following table indicate the individual ensemble member that constitutes the
 
 ### Acknowledgments
 This work has received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No. 740073 (CLIM4CROP project);
-from the Spanish Ministry of Science, Innovation and Universities through the project PREDFIRE (RTI2018-099711-J-I00); from the FundaciónSéneca - Regional Agency for Science and Technology of Murcia through the CLIMAX project (20642/JLI/18); 
-from the Plan Propio de Investigación of the University of Murcia (grant No. UMU-2017-10604). 
-The authors thank the data provider listed in the previous Table for providing access to these datasets. Special thanks to Dr. Meng Zhao to provide the GRACE data and Dr. Hong Xuan Do for providing R scripts to read and process the GSIM data.
-
+from the Spanish Ministry of Science, Innovation and Universities through the project PREDFIRE (RTI2018-099711-J-I00), which is co-financed with the European Regional Development Fund (ERDF/FEDER); from the FundaciónSéneca - Regional Agency for Science and Technology of Murcia through the CLIMAX project (20642/JLI/18); 
+from the Plan Propio de Investigación of the University of Murcia (grant No. UMU-2017-10604); from the Spanish Ministry of Science, Innovation and Universities through the Ramón y Cajal grant, reference RYC-2017-22964. The authors thank the data provider listed in the previous Table for providing access to these datasets. Special thanks to Dr. Meng Zhao to provide the GRACE data and Dr. Hong Xuan Do for providing R scripts to read and process the GSIM data.
 
 ### Source Code
-Full source code is available from the gitlab repository https://earth.bsc.es/gitlab/mturco/drop.
+Full source code is available from the github repository https://github.com/marcoturco/DROP.
 
 ### Citation
-Marco Turco, Sonia Jerez, Markus Donat, Andrea Toreti, Sergio M. Vicente-Serrano and Francisco J. Doblas-Reyes (2019). "An operational global probabilistic dataset for monitoring meteorological droughts". BAMS. Under review.
+Marco Turco, Sonia Jerez, Markus Donat, Andrea Toreti, Sergio M. Vicente-Serrano and Francisco J. Doblas-Reyes (2019). "A global probabilistic dataset for monitoring meteorological droughts". BAMS. Under review.
 
 ### References
 EC (European Commission). (2010). Risk assessment and mapping guidelines for disaster management. Commission Staff Working Paper, SEC (2010) 1626 final, Brussels.
