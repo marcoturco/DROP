@@ -60,7 +60,7 @@ from the Plan Propio de Investigación of the University of Murcia (grant No. UM
 Full source code is available from the github repository https://github.com/marcoturco/DROP.
 
 ### Citation
-Marco Turco, Sonia Jerez, Markus Donat, Andrea Toreti, Sergio M. Vicente-Serrano and Francisco J. Doblas-Reyes (2019). "A global probabilistic dataset for monitoring meteorological droughts". BAMS. Under review.
+Turco, M., S. Jerez, M.G. Donat, A. Toreti, S.M. Vicente-Serrano, and F.J. Doblas-Reyes, 0: A global probabilistic dataset for monitoring meteorological droughts. Bull. Amer. Meteor. Soc., 0, https://doi.org/10.1175/BAMS-D-19-0192.1
 
 ### References
 EC (European Commission). (2010). Risk assessment and mapping guidelines for disaster management. Commission Staff Working Paper, SEC (2010) 1626 final, Brussels.
