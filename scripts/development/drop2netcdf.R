@@ -10,8 +10,10 @@ data(wrld_simpl)
 time_scale = c(1, 3, 6, 12)
 # time_scale = c(1)
 
-dirin = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
-dirout = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/github/drop/data'
+dirin = '/Users/marco/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
+dirout = '/Users/marco/Dropbox/estcena/scripts/obs_uncertainty/github/drop/data'
+# dirin = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
+# dirout = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/github/drop/data'
 
 # setwd(dirin)
 # files = list.files(pattern = "^SPI(.*)RData$")
@@ -26,7 +28,7 @@ londim <- ncdim_def("lon", "degrees_east", as.double(lon))
 latdim <- ncdim_def("lat", "degrees_north", as.double(lat))
 
 
-fechas<-seq(as.Date("1981/1/1"), as.Date("2020/1/1"), by = "month")
+fechas<-seq(as.Date("1981/1/1"), as.Date("2020/4/1"), by = "month")
 anni=1981:2020
 time=seq(0,length(fechas)-1)
 tunits <- "months since 1981-01-01 00:00:00.0 -0:00"

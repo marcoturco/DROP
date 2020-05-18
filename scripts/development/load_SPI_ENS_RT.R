@@ -14,7 +14,7 @@ library(maps)
 anni = 1981:2020
 mesi = rep(1:12, length(anni))
 anno_2000 = which(anni == 2020)
-mese_ind = which(mesi == 1)
+mese_ind = which(mesi == 4)
 last_month = mese_ind[anno_2000]
 
 
@@ -24,9 +24,12 @@ data(wrld_simpl)
 
 
 ## fix parameters
-dir_oss = '/data/disk1/'
-dir_out = '/data/disk1/DROP/'
-dir_data = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
+# dir_oss = '/data/disk1/'
+# dir_out = '/data/disk1/DROP/'
+# dir_data = '/home/mt/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
+dir_oss = '/Users/marco/Documents/dati/obs/'
+dir_out = '/Users/marco/Documents/dati/obs/DROP/'
+dir_data = '/Users/marco/Dropbox/estcena/scripts/obs_uncertainty/app_drop/data/'
 
 
 
@@ -48,9 +51,8 @@ for (isc in 1:length(time_scale)) {
   print(nam)
   
   load(file.path(
-    paste(dir_oss,
-      "/CAMS_OPI/cams_opi_v0208/SPI",
-      sc,
+    paste(dir_out,"/SPI",
+          sc,
       "_CAMS_OPI_1981_2020.RData",
       sep = ""
     )
@@ -59,7 +61,7 @@ for (isc in 1:length(time_scale)) {
   pred[, , , 1] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss,"/CHIRPS/SPI",
+    paste(dir_out,"/SPI",
       sc,
       "_CHIRPS_1981_2020.RData",
       sep = ""
@@ -69,9 +71,7 @@ for (isc in 1:length(time_scale)) {
   pred[, , , 2] = aux[, ,]
   
   load(file.path(
-    paste(
-      dir_oss,
-      "/CPC_GLOBAL_PRECIP/SPI",
+    paste(dir_out,"/SPI",
       sc,
       "_CPC_1981_2020.RData",
       sep = ""
@@ -81,10 +81,8 @@ for (isc in 1:length(time_scale)) {
   pred[, , , 3] = aux[, ,]
   
   load(file.path(
-    paste(
-      dir_oss,
-      "/ERA5/SPI",
-      sc,
+    paste(dir_out,"/SPI",
+          sc,
       "_ERA5_1981_2020.RData",
       sep = ""
     )
@@ -92,45 +90,45 @@ for (isc in 1:length(time_scale)) {
   aux = get(nam)
   pred[, , , 4] = aux[, ,]
   
-  
   load(file.path(
-    paste(dir_oss, "/GPCCv2018/SPI", sc, "_GPCC_1981_2020.RData", sep = "")
+    paste(dir_out,"/SPI", sc, "_GPCC_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 5] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss, "/GPCPv2_3/SPI", sc, "_GPCP_1981_2020.RData", sep = "")
+    paste(dir_out,"/SPI", sc, "_GPCP_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 6] = aux[, ,]
   
   
   load(file.path(
-    paste(dir_oss, "/JRA55/SPI", sc, "_JRA55_1981_2020.RData", sep = "")
+    paste(dir_out,"/SPI",
+          sc, "_JRA55_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 7] = aux[, ,]
+  # 
+  # load(file.path(
+  #   paste(dir_oss,
+  #     "/MERRA2/SPI",
+  #     sc,
+  #     "_MERRA2_1981_2020.RData",
+  #     sep = ""
+  #   )
+  # ))
+  # aux = get(nam)
+  # pred[, , , 8] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss,
-      "/MERRA2/SPI",
-      sc,
-      "_MERRA2_1981_2020.RData",
-      sep = ""
-    )
-  ))
-  aux = get(nam)
-  pred[, , , 8] = aux[, ,]
-  
-  load(file.path(
-    paste(dir_oss, "/NCEP/SPI", sc, "_NCEP_1981_2020.RData", sep = "")
+    paste(dir_out,"/SPI", sc, "_NCEP_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 9] = aux[, ,]
   
   load(file.path(
-    paste(dir_oss, "/PRECL/SPI", sc, "_PRECL_1981_2020.RData", sep = "")
+    paste(dir_out,"/SPI", sc, "_PRECL_1981_2020.RData", sep = "")
   ))
   aux = get(nam)
   pred[, , , 10] = aux[, ,]

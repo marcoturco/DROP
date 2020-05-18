@@ -8,26 +8,33 @@ library(maptools) # loads sp library too
 library(fields)
 library(maps)
 library(SPEI)
+library(RColorBrewer)
 
 data(wrld_simpl)
 
 
 ## datasets
-datasets = c('NCEP','MERRA2')
-# 
-# datasets = c('ERA5',
-#              'CHIRPS',
+# datasets = c('CHIRPS',
 #              'CPC',
 #              'PRECL',
-#              'CAMS_OPI',
 #              'GPCC',
 #              'GPCP',
-#              'JRA55',
-#              'NCEP',
-#              'MSWEP')
+#              'NCEP')
+
+# 
+datasets = c('ERA5',
+             'CHIRPS',
+             'CPC',
+             'PRECL',
+             'CAMS_OPI',
+             'GPCC',
+             'GPCP',
+             'JRA55',
+             'NCEP')
 
 ## fix parameters
-dir_oss = '/data/disk1/'
+# dir_oss = '/data/disk1/'
+dir_oss = '/Users/marco/Documents/dati/obs/'
 
 anni = 1981:2020
 mesi = rep(1:12, length(anni))
@@ -53,24 +60,27 @@ for (idata in 1:length(datasets)) {
   print(dataset)
    if (dataset == "JRA55") {
     dir_spi='/data/disk1/JRA55'
-    fname<-file.path(dir_spi, 'JRA55_1981_2020_25_monthly.nc')
+    # fname<-file.path(dir_spi, 'JRA55_1981_2020_25_monthly.nc')
+    fname<-file.path(dir_oss, 'JRA55/JRA55_1981_2020_25_monthly.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"prlr")
   } else if (dataset == "GPCP") {
     dir_spi='/data/disk1/GPCPv2_3/'
-    fname <- file.path(dir_spi, 'gpcp_cdr_v23rB1_1981_2020.nc')
+    # fname <- file.path(dir_spi, 'gpcp_cdr_v23rB1_1981_2020.nc')
+    fname <- file.path(dir_oss, 'GPCPv2_3/gpcp_cdr_v23rB1_1981_2020.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc, "precip")
     obs[obs == "-9999"] <- NA
  } else if (dataset == "GPCC") {
    dir_spi='/data/disk1/GPCCv2018'
-   fname<-file.path(dir_spi, 'prec_1981_2020.nc')
+   fname<-file.path(dir_oss, 'GPCCv2018/prec_1981_2020.nc')
    obs.nc <- nc_open(fname)
    obs <- ncvar_get(obs.nc,"precip") 
    obs[obs=="-99999.9921875"] <- NA
   } else if (dataset == "CAMS_OPI") {
-    dir_spi='/data/disk1/CAMS_OPI/cams_opi_v0208'
-    fname<-file.path(dir_spi, 'camsopi_timecorrect-2.5-1981-2020.nc')
+    # dir_spi='/data/disk1/CAMS_OPI/cams_opi_v0208'
+    # fname<-file.path(dir_spi, 'camsopi_timecorrect-2.5-1981-2020.nc')
+    fname<-file.path(dir_oss, 'CAMS_OPI/cams_opi_v0208/camsopi_timecorrect-2.5-1981-2020.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"prcp") 
     # obs=obs[,,1:(dim(obs)[3]-12)]
@@ -78,32 +88,33 @@ for (idata in 1:length(datasets)) {
     obs[,,63]=NA*obs[,,63] #BE CAREFULL, 198603 is missing
     
   } else if (dataset == "PRECL") {
-    dir_spi='/data/disk1/PRECL'
-    fname<-file.path(dir_spi, 'precip.mon.mean.2.5x2.5.1981_2020.nc')
+    # dir_spi='/data/disk1/PRECL'
+    fname<-file.path(dir_oss, 'PRECL/precip.mon.mean.2.5x2.5.1981_2020.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"precip") 
   } else if (dataset == "CPC") {
-    dir_spi='/data/disk1/CPC_GLOBAL_PRECIP'
-    fname<-file.path(dir_spi, 'precip_1981_2020_monthly.nc')
+    # dir_spi='/data/disk1/CPC_GLOBAL_PRECIP'
+    fname<-file.path(dir_oss, 'CPC_GLOBAL_PRECIP/precip_1981_2020_monthly.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"precip") 
     obs=obs[,,-dim(obs)[3]] #eliminate current month
     obs[obs=="-9.96920996838687e+36"] <- NA
   } else if (dataset == "CHIRPS") {
-    dir_spi='/data/disk1/CHIRPS'
-    fname<-file.path(dir_spi, 'chirps-v2.0.monthly-2.5.nc')
+    # dir_spi='/data/disk1/CHIRPS'
+    fname<-file.path(dir_oss, 'CHIRPS/chirps-v2.0.monthly-2.5.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"precip")
     obs[obs=="-9999"] <- NA
   } else if (dataset == "ERA5") {
-    dir_spi='/data/disk1/ERA5'
-    fname<-file.path(dir_spi, 'ERA5-drop.nc')
+    # dir_spi='/data/disk1/ERA5'
+    # fname<-file.path(dir_spi, 'ERA5-drop.nc')
+    fname<-file.path(dir_oss, 'ERA5/ERA5-drop.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"tp") 
     obs[obs=="-32767s"] <- NA
   } else if (dataset == "NCEP") {
-    dir_spi='/data/disk1/NCEP'
-    fname<-file.path(dir_spi, 'prate_1981_2020_monthly.nc')
+    # dir_spi='/data/disk1/NCEP'
+    fname<-file.path(dir_oss, 'NCEP/prate_1981_2020_monthly.nc')
     obs.nc <- nc_open(fname)
     obs <- ncvar_get(obs.nc,"prate") 
   } else if (dataset == "MERRA2") {
@@ -132,14 +143,9 @@ for (idata in 1:length(datasets)) {
   prec = array(data = NA,dim = c(nrow(obs),ncol(obs),length(anni)*12))
   prec[,,1:dim(obs)[3]]=obs
   
-  
-  #map("world2", add = TRUE)
-  
   for (i in 1:dim(prec)[3]) {
     prec[, , i] = inout * prec[, , i]
   }
-  
-
   
   aux=apply(prec,c(1,2),mean,na.rm=TRUE)
   image.plot(lon,lat,aux/aux)
@@ -153,50 +159,49 @@ for (idata in 1:length(datasets)) {
   plot(wrld_simpl, add = TRUE)
   
   ## calculate SPI
-  
+
   spi1 = prec * NA
   spi3 = prec * NA
   spi6 = prec * NA
   spi12 = prec * NA
   for (i in 1:length(lon)) {
-    print(paste0('grid ',i,' of ',length(lon)))   
+    print(paste0('grid ',i,' of ',length(lon)))
     for (j in 1:length(lat)) {
       #if (!is.na(inout[i, j])) {
       if (!is.na(aux[i, j]/aux[i, j])) {
-        
-        
-        #print(paste0('grid ',j,' of ',length(lat)))
+
+        # print(paste0('grid ',j,' of ',length(lat)))
         dum <- spi(prec[i, j,], 1, na.rm = TRUE)
         spi1[i, j,] = dum$fitted
         rm(dum)
-        
+
         dum <- spi(prec[i, j,], 3, na.rm = TRUE)
         spi3[i, j,] = dum$fitted
         rm(dum)
-        
+
         dum <- spi(prec[i, j,], 6, na.rm = TRUE)
         spi6[i, j,] = dum$fitted
         rm(dum)
-        
+
         dum <- spi(prec[i, j,], 12, na.rm = TRUE)
         spi12[i, j,] = dum$fitted
         rm(dum)
-        
+
       }
     }
   }
-  
+
   # ## plot
   anno_2000 = which(anni == 2019)
   mese_aug = which(mesi == 10)
   mese_aug2000 = mese_aug[anno_2000]
-  
-  library(RColorBrewer)
+
+
   cols <- brewer.pal(9, "BrBG")
   image.plot(lon, lat, spi6[, , mese_aug2000],zlim = c(-2, 2), col = cols)
   plot(wrld_simpl, add = TRUE)
-  
-  
+
+  dir_spi="/Users/marco/Documents/dati/obs/DROP/"
   ### SAVE
   save(spi1, file = file.path(dir_spi, paste0("SPI1_", dataset, "_1981_2020.RData")))
   save(spi3, file = file.path(dir_spi, paste0("SPI3_", dataset, "_1981_2020.RData")))
